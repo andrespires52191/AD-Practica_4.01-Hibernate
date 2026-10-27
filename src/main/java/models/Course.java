@@ -13,7 +13,7 @@ public class Course {
     @NotNull
     private String title;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
