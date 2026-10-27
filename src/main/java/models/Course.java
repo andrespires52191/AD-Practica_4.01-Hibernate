@@ -17,8 +17,10 @@ public class Course {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
-    // Add getters, setters, constructors, toString
+    @OneToOne(mappedBy = "course")
+    private CourseMaterial material;
 
+    // Add getters, setters, constructors, toString
     public Course() {
     }
 
@@ -48,6 +50,14 @@ public class Course {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public CourseMaterial getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(CourseMaterial material) {
+        this.material = material;
     }
 
     @Override

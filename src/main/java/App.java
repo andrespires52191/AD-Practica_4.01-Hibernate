@@ -1,12 +1,15 @@
 import dao.CourseDao;
+import dao.CourseMateriaDao;
 import dao.TeacherDao;
 import models.Course;
+import models.CourseMaterial;
 import models.Teacher;
 
 public class App {
     public static void main(String[] args) {
         TeacherDao teacherDao = new TeacherDao();
         CourseDao courseDao = new CourseDao();
+        CourseMateriaDao courseMateriaDao = new CourseMateriaDao();
 
 //        Teacher teacher = new Teacher();
 //        teacher.setLastName("Arbaiza");
@@ -47,15 +50,34 @@ public class App {
 //        courseDao.create(course3);
 
 
+//        Course course4 = new Course("Programación de Servicios y Procesos");
+//        Teacher teacher4 = new Teacher();
+//        teacher4.setFirstName("nombre");
+//        teacher4.setLastName("apellido");
+//        course4.setTeacher(teacher4);
+//        // Se han modificado los cascades de manera que el profesor se inserta automáticamente
+//        courseDao.create(course4);
+
+
         Course course4 = new Course("Programación de Servicios y Procesos");
-        // Da error porque está configurado que el profesor es obligatorio.
-        //courseDao.create(course4);
         Teacher teacher4 = new Teacher();
         teacher4.setFirstName("nombre");
         teacher4.setLastName("apellido");
         course4.setTeacher(teacher4);
-        // Se han modificado los cascades de manera que el profesor se inserta automáticamente
-        courseDao.create(course4);
+        course4 = courseDao.create(course4);
 
+        CourseMaterial material = new CourseMaterial();
+        material.setUrl("www");
+        material.setCourse(course4);
+        material = courseMateriaDao.create(material);
+
+        course4.setMaterial(material);
+        course4 = courseDao.update(course4);
+
+        System.out.println(material.getId());
+        System.out.println(courseMateriaDao.find(material.getId()).getCourse());
+
+        System.out.println(course4.getId());
+        System.out.println(courseDao.find(course4.getId()).getMaterial());
     }
 }
