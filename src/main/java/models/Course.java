@@ -3,6 +3,8 @@ package models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
 @Entity
 public class Course {
     @Id
@@ -19,6 +21,14 @@ public class Course {
 
     @OneToOne(mappedBy = "course")
     private CourseMaterial material;
+
+    @ManyToMany
+    @JoinTable(
+            name = "students_courses",
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
+    )
+    private List<Student> students;
 
     // Add getters, setters, constructors, toString
     public Course() {
@@ -58,6 +68,10 @@ public class Course {
 
     public void setMaterial(CourseMaterial material) {
         this.material = material;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     @Override
