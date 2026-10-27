@@ -18,6 +18,10 @@ public class Course {
     private Teacher teacher;
 
     // Add getters, setters, constructors, toString
+
+    public Course() {
+    }
+
     public Course(String title) {
         this.title = title;
     }
@@ -44,5 +48,10 @@ public class Course {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    @Override
+    public String toString() {
+        return "Curso: " + title;
     }
 }

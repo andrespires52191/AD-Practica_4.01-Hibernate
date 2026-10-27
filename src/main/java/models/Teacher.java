@@ -21,6 +21,9 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
     private List<Course> courses;
 
+    public Teacher() {
+    }
+
     // Add getters, setters, constructors, toString
     public Integer getId() {
         return id;
@@ -52,5 +55,10 @@ public class Teacher {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    @Override
+    public String toString() {
+        return "Profe: " + firstName + " " + lastName;
     }
 }
