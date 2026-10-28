@@ -1,8 +1,9 @@
 import dao.CourseDao;
 import dao.CourseMateriaDao;
+import dao.StudentDao;
 import dao.TeacherDao;
 import models.Course;
-import models.CourseMaterial;
+import models.Student;
 import models.Teacher;
 
 public class App {
@@ -10,7 +11,10 @@ public class App {
         TeacherDao teacherDao = new TeacherDao();
         CourseDao courseDao = new CourseDao();
         CourseMateriaDao courseMateriaDao = new CourseMateriaDao();
+        StudentDao studentDao = new StudentDao();
 
+
+        // Tareas 1 y 2
 //        Teacher teacher = new Teacher();
 //        teacher.setLastName("Arbaiza");
 //        teacher.setFirstName("Eider");
@@ -36,7 +40,9 @@ public class App {
 //
 //        courseDao.delete(course2);
 //        teacherDao.delete(teacher);
-//
+
+
+        // Tarea 3 y 4
 //        Course course3 = new Course("Programación de Servicios y Procesos");
 //        // Da error porque está configurado que el profesor es obligatorio.
 //        //courseDao.create(course3);
@@ -50,6 +56,7 @@ public class App {
 //        courseDao.create(course3);
 
 
+        // Prueba cascade persist
 //        Course course4 = new Course("Programación de Servicios y Procesos");
 //        Teacher teacher4 = new Teacher();
 //        teacher4.setFirstName("nombre");
@@ -59,25 +66,60 @@ public class App {
 //        courseDao.create(course4);
 
 
-        Course course4 = new Course("Programación de Servicios y Procesos");
-        Teacher teacher4 = new Teacher();
-        teacher4.setFirstName("nombre");
-        teacher4.setLastName("apellido");
-        course4.setTeacher(teacher4);
-        course4 = courseDao.create(course4);
+        // Tarea 5
+//        Course course4 = new Course("Programación de Servicios y Procesos");
+//        Teacher teacher4 = new Teacher();
+//        teacher4.setFirstName("nombre");
+//        teacher4.setLastName("apellido");
+//        course4.setTeacher(teacher4);
+//        course4 = courseDao.create(course4);
+//
+//        CourseMaterial material = new CourseMaterial();
+//        material.setUrl("www");
+//        material.setCourse(course4);
+//        material = courseMateriaDao.create(material);
+//
+//        course4.setMaterial(material);
+//        course4 = courseDao.update(course4);
+//
+//        System.out.println(material.getId());
+//        System.out.println(courseMateriaDao.find(material.getId()).getCourse());
+//
+//        System.out.println(course4.getId());
+//        System.out.println(courseDao.find(course4.getId()).getMaterial());
 
-        CourseMaterial material = new CourseMaterial();
-        material.setUrl("www");
-        material.setCourse(course4);
-        material = courseMateriaDao.create(material);
 
-        course4.setMaterial(material);
-        course4 = courseDao.update(course4);
+        // Tarea 6
+        Student student1 = new Student("a", "a");
+        Student student2 = new Student("b", "b");
+        Student student3 = new Student("c", "c");
+//        studentDao.create(student1);
+//        studentDao.create(student2);
+//        studentDao.create(student3);
 
-        System.out.println(material.getId());
-        System.out.println(courseMateriaDao.find(material.getId()).getCourse());
+        Teacher teacher = new Teacher();
+        teacher.setLastName("Arbaiza");
+        teacher.setFirstName("Eider");
 
-        System.out.println(course4.getId());
-        System.out.println(courseDao.find(course4.getId()).getMaterial());
+        Course course = new Course("curso con estudiantes");
+        course.setTeacher(teacher);
+        course.addStudent(student1);
+        student1.getCourses().add(course);
+        course.addStudent(student2);
+        student2.getCourses().add(course);
+        course.addStudent(student3);
+        student3.getCourses().add(course);
+        course = courseDao.create(course);
+
+        course = courseDao.find(course.getId());
+        for (Student s : course.getStudents()) {
+            System.out.println(s);
+
+            for (Course c : studentDao.find(s.getId()).getCourses()) {
+                System.out.println("\t" + c);
+            }
+        }
+
+
     }
 }
