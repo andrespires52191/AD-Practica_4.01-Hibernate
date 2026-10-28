@@ -90,36 +90,61 @@ public class App {
 
 
         // Tarea 6
-        Student student1 = new Student("a", "a");
-        Student student2 = new Student("b", "b");
-        Student student3 = new Student("c", "c");
-//        studentDao.create(student1);
-//        studentDao.create(student2);
-//        studentDao.create(student3);
+//        Student student1 = new Student("a", "a");
+//        Student student2 = new Student("b", "b");
+//        Student student3 = new Student("c", "c");
+//        Teacher teacher = new Teacher();
+//        teacher.setLastName("Arbaiza");
+//        teacher.setFirstName("Eider");
+//
+//        Course course = new Course("curso con estudiantes");
+//        course.setTeacher(teacher);
+//        course.addStudent(student1);
+//        student1.getCourses().add(course);
+//        course.addStudent(student2);
+//        student2.getCourses().add(course);
+//        course.addStudent(student3);
+//        student3.getCourses().add(course);
+//        course = courseDao.create(course);
+//
+//        course = courseDao.find(course.getId());
+//        for (Student s : course.getStudents()) {
+//            System.out.println(s);
+//
+//            for (Course c : studentDao.find(s.getId()).getCourses()) {
+//                System.out.println("\t" + c);
+//            }
+//        }
 
+
+        // Tarea 7
+        Student student1 = new Student("a", "a");
         Teacher teacher = new Teacher();
         teacher.setLastName("Arbaiza");
         teacher.setFirstName("Eider");
 
-        Course course = new Course("curso con estudiantes");
-        course.setTeacher(teacher);
-        course.addStudent(student1);
-        student1.getCourses().add(course);
-        course.addStudent(student2);
-        student2.getCourses().add(course);
-        course.addStudent(student3);
-        student3.getCourses().add(course);
-        course = courseDao.create(course);
+        Course course1 = new Course("curso 1");
+        course1.setTeacher(teacher);
+        course1.addStudent(student1);
+        student1.getCourses().add(course1);
 
-        course = courseDao.find(course.getId());
-        for (Student s : course.getStudents()) {
-            System.out.println(s);
+        Course course2 = new Course("curso 2");
+        course2.setTeacher(teacher);
+        course2.addStudent(student1);
+        student1.getCourses().add(course2);
 
-            for (Course c : studentDao.find(s.getId()).getCourses()) {
-                System.out.println("\t" + c);
-            }
+        Course course3 = new Course("curso 3");
+        course3.setTeacher(teacher);
+        course3.addStudent(student1);
+        student1.getCourses().add(course3);
+
+        course1 = courseDao.create(course1);
+
+        course1 = courseDao.find(course1.getId());
+
+        for (Course c : studentDao.find(student1.getId()).getCourses()) {
+            System.out.println("\t" + c);
         }
-
 
     }
 }
