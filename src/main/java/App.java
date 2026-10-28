@@ -6,6 +6,8 @@ import models.Course;
 import models.Student;
 import models.Teacher;
 
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
         TeacherDao teacherDao = new TeacherDao();
@@ -142,8 +144,13 @@ public class App {
 
         course1 = courseDao.find(course1.getId());
 
-        for (Course c : studentDao.find(student1.getId()).getCourses()) {
-            System.out.println("\t" + c);
+//        for (Course c : studentDao.find(student1.getId()).getCourses()) {
+//            System.out.println("\t" + c);
+//        }
+
+        List<Course> courses = courseDao.listCoursesByTeacherLastName("Arbaiza");
+        for (Course c : courses) {
+            System.out.println(c);
         }
 
     }
